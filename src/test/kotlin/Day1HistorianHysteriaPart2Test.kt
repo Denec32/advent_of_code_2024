@@ -1,17 +1,19 @@
 import com.denec.Day1HistorianHysteria
-import kotlin.test.Test
-import kotlin.test.assertEquals
+import com.denec.Day1HistorianHysteriaPart2
+import org.junit.jupiter.api.Test
 
-class Day1HistorianHysteriaTest {
+import org.junit.jupiter.api.Assertions.*
+class Day1HistorianHysteriaPart2Test {
+
     @Test
     fun solve_example() {
-     assertEquals(11, Day1HistorianHysteria().solve(listOf(3, 4, 2, 1, 3, 3), listOf(4, 3, 5, 3, 9, 3)));
+        assertEquals(31, Day1HistorianHysteriaPart2().solve(listOf(3, 4, 2, 1, 3, 3), listOf(4, 3, 5, 3, 9, 3)))
     }
 
     @Test
     fun solve() {
         val (firstList, secondList) = parseInput("input_1.txt")
-        Day1HistorianHysteria().solve(firstList, secondList)
+        Day1HistorianHysteriaPart2().solve(firstList, secondList)
     }
 
     private fun parseInput(inputFileName: String): Pair<MutableList<Int>, MutableList<Int>> {
@@ -28,4 +30,4 @@ class Day1HistorianHysteriaTest {
 
         return firstList to secondList;
     }
- }
+}
