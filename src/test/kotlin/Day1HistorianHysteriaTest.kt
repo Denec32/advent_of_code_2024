@@ -10,7 +10,7 @@ class Day1HistorianHysteriaTest {
 
     @Test
     fun solve() {
-        val (firstList, secondList) = parseInput("input_1.txt")
+        val (firstList, secondList) = parseInput("input_1.1.txt")
         assertEquals(2378066, Day1HistorianHysteria().solve(firstList, secondList))
     }
 
