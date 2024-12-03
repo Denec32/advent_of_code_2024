@@ -1,8 +1,8 @@
-import com.denec.Day1HistorianHysteria
 import com.denec.Day1HistorianHysteriaPart2
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import reader.InputReader
 
-import org.junit.jupiter.api.Assertions.*
 class Day1HistorianHysteriaPart2Test {
 
     @Test
@@ -12,22 +12,7 @@ class Day1HistorianHysteriaPart2Test {
 
     @Test
     fun solve() {
-        val (firstList, secondList) = parseInput("input_1.txt")
+        val (firstList, secondList) = InputReader.parseDayOneInput()
         Day1HistorianHysteriaPart2().solve(firstList, secondList)
-    }
-
-    private fun parseInput(inputFileName: String): Pair<MutableList<Int>, MutableList<Int>> {
-        val input = {}.javaClass.getResource(inputFileName)?.readText() ?: ""
-        val firstList = mutableListOf<Int>()
-        val secondList = mutableListOf<Int>()
-
-        for (line in input.lines()) {
-            if (line.isEmpty()) continue
-            val (first, second) = line.split("   ")
-            firstList.add(first.toInt())
-            secondList.add(second.toInt())
-        }
-
-        return firstList to secondList;
     }
 }
