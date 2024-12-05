@@ -35,5 +35,11 @@ class InputReader {
             val input = {}.javaClass.getResource("/input_4.txt")?.readText() ?: ""
             return input.lines().filter { line -> line.isNotEmpty() }.toList()
         }
+
+        fun parseDayFiveInput(): Pair<List<String>, List<String>> {
+            val input = {}.javaClass.getResource("/input_5.txt")?.readText() ?: ""
+            val idx = input.lines().indexOf("");
+            return Pair(input.lines().take(idx), input.lines().drop(idx + 1).dropLast(1))
+        }
     }
 }
