@@ -41,5 +41,23 @@ class InputReader {
             val idx = input.lines().indexOf("");
             return Pair(input.lines().take(idx), input.lines().drop(idx + 1).dropLast(1))
         }
+
+        fun parseDaySixInput(): List<List<Char>> {
+            val input = {}.javaClass.getResource("/input_6.txt")?.readText() ?: ""
+
+            return input.lines().stream()
+                .map { toList(it) }
+                .filter { it.isNotEmpty() }
+                .toList()
+        }
+
+        private fun toList(line: String): List<Char> {
+            val list = mutableListOf<Char>()
+            for (letter in line.toCharArray()) {
+                list.add(letter)
+            }
+
+            return list
+        }
     }
 }
