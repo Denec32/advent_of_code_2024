@@ -64,5 +64,10 @@ class InputReader {
             val input = {}.javaClass.getResource("/input_7.txt")?.readText() ?: ""
             return input.lines().filter { line -> line.isNotEmpty() }
         }
+
+        fun parseDayEightInput(): List<String> {
+            val input = {}.javaClass.getResource("/input_8.txt")?.readText() ?: ""
+            return input.lines().filter { line -> line.isNotEmpty() }
+        }
     }
 }
