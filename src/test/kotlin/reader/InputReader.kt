@@ -69,5 +69,9 @@ class InputReader {
             val input = {}.javaClass.getResource("/input_8.txt")?.readText() ?: ""
             return input.lines().filter { line -> line.isNotEmpty() }
         }
+
+        fun parseDayNineInput(): String {
+            return {}.javaClass.getResource("/input_9.txt")?.readText() ?: ""
+        }
     }
 }
