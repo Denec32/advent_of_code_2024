@@ -1,5 +1,7 @@
 package reader
 
+import kotlin.streams.toList
+
 class InputReader {
     companion object {
         fun parseDayOneInput(): Pair<MutableList<Int>, MutableList<Int>> {
@@ -72,6 +74,15 @@ class InputReader {
 
         fun parseDayNineInput(): String {
             return {}.javaClass.getResource("/input_9.txt")?.readText() ?: ""
+        }
+
+        fun parseDayTenInput(): List<List<Int>> {
+            val input = {}.javaClass.getResource("/input_10.txt")?.readText() ?: ""
+
+            return input.lines().stream()
+                .filter { line -> line.isNotEmpty() }
+                .map { line -> line.toCharArray().map { it.digitToInt() } }
+                .toList()
         }
     }
 }
