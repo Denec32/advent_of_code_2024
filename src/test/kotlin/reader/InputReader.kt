@@ -84,5 +84,10 @@ class InputReader {
                 .map { line -> line.toCharArray().map { it.digitToInt() } }
                 .toList()
         }
+
+        fun parseDayTwelveInput(): List<String> {
+            val input = {}.javaClass.getResource("/input_12.txt")?.readText() ?: ""
+            return input.lines().filter { line -> line.isNotEmpty() }
+        }
     }
 }
