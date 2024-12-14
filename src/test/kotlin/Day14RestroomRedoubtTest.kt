@@ -1,4 +1,5 @@
 import com.denec.Day14RestroomRedoubt
+import com.denec.Day14RestroomRedoubtPart2
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import reader.InputReader
@@ -25,5 +26,10 @@ class Day14RestroomRedoubtTest {
     @Test
     fun solve() {
         println(Day14RestroomRedoubt().solve(InputReader.parseDayFourteenInput(), 101, 103))
+    }
+
+    @Test
+    fun solve_part_2() {
+        Day14RestroomRedoubtPart2().solve(InputReader.parseDayFourteenInput(), 101, 103)
     }
  }
