@@ -99,5 +99,12 @@ class InputReader {
             val input = {}.javaClass.getResource("/input_14.txt")?.readText() ?: ""
             return input.lines().dropLast(1)
         }
+
+
+        fun parseDayFifteenInput(): Pair<List<String>, List<String>> {
+            val input = {}.javaClass.getResource("/input_15.txt")?.readText() ?: ""
+            val idx = input.lines().indexOf("");
+            return Pair(input.lines().take(idx), input.lines().drop(idx + 1).dropLast(1))
+        }
     }
 }
