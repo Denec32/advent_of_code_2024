@@ -26,24 +26,24 @@ class Day21KeypadConundrum {
         "<v>"
     )
 
-    fun solve(codes: List<String>): Long {
-        return codes.map { solve(it) }.reduce(Long::plus)
+    fun solve(codes: List<String>, dirKeypadCount: Int): Long {
+        return codes.map { solve(it, dirKeypadCount) }.reduce(Long::plus)
     }
 
-    fun solve(code: String): Long {
-        val keypadInputSequence = calculateKeypadSequence(code)
+    fun solve(code: String, dirKeypadCount: Int): Long {
+        val keypadInputSequence = calculateKeypadSequence(code, dirKeypadCount)
 
         return keypadInputSequence * code.dropLast(1).toLong()
     }
 
-    private fun calculateKeypadSequence(code: String): Long {
+    private fun calculateKeypadSequence(code: String, dirKeypadCount: Int): Long {
         val sequence = "A$code"
         var length = 0L
         for (i in 1..sequence.lastIndex) {
             var len = Long.MAX_VALUE
             val sequences = getKeypadSequence(sequence[i - 1], sequence[i], keypad)
 
-            sequences.forEach { len = min(len, calculateDirKeypadSequence1(it)) }
+            sequences.forEach { len = min(len, calculateDirKeypadSequence1(it, dirKeypadCount)) }
 
             length += len
         }
@@ -51,33 +51,29 @@ class Day21KeypadConundrum {
         return length
     }
 
-    private fun calculateDirKeypadSequence1(code: String): Long {
+    private val memo1 = mutableMapOf<String, Long>()
+
+    private fun calculateDirKeypadSequence1(code: String, count: Int): Long {
+        val key = "$code $count"
+        if (memo1.containsKey(key)) {
+            return memo1[key]!!
+        }
+
         val sequence = "A$code"
         var length = 0L
         for (i in 1..sequence.lastIndex) {
             var len = Long.MAX_VALUE
             val sequences = getKeypadSequence(sequence[i - 1], sequence[i], directionalKeypad)
 
-            sequences.forEach { len = min(len, calculateDirKeypadSequence2(it)) }
+            if (count == 1) {
+                sequences.forEach { len = min(len, it.length.toLong()) }
+            } else {
+                sequences.forEach { len = min(len, calculateDirKeypadSequence1(it, count - 1)) }
+            }
 
             length += len
         }
-
-        return length
-    }
-
-    private fun calculateDirKeypadSequence2(code: String): Long {
-        val sequence = "A$code"
-        var length = 0L
-        for (i in 1..sequence.lastIndex) {
-            var len = Long.MAX_VALUE
-            val sequences = getKeypadSequence(sequence[i - 1], sequence[i], directionalKeypad)
-
-            sequences.forEach { len = min(len, it.length.toLong()) }
-
-            length += len
-        }
-
+        memo1[key] = length
         return length
     }
 
@@ -88,7 +84,16 @@ class Day21KeypadConundrum {
         directions[2] to '<',
         directions[3] to '^'
     )
+
+    private val memo = mutableMapOf<String, List<String>>()
+
     private fun getKeypadSequence(src: Char, dest: Char, keypad: List<String>): List<String> {
+        val key = "$src$dest"
+
+        if (memo.containsKey(key)) {
+            return memo[key]!!
+        }
+
         val start = findLetter(keypad, src)
         val end = findLetter(keypad, dest)
 
@@ -101,7 +106,8 @@ class Day21KeypadConundrum {
             len = min(len, res.length)
         }
 
-        return result.filter { it.length == len }
+        memo[key] = result.filter { it.length == len }
+        return memo[key]!!
     }
 
     private fun dfs(
