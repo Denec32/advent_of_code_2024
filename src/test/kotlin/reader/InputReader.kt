@@ -121,5 +121,15 @@ class InputReader {
             val input = {}.javaClass.getResource("/input_19.txt")?.readText() ?: ""
             return input.lines().dropLast(1)
         }
+
+        fun parseDayTwentyInput(): List<String> {
+            val input = {}.javaClass.getResource("/input_20.txt")?.readText() ?: ""
+            return input.lines().dropLast(1)
+        }
+
+        fun parseDayTwentyTwoInput(): List<String> {
+            val input = {}.javaClass.getResource("/input_22.txt")?.readText() ?: ""
+            return input.lines().dropLast(1)
+        }
     }
 }
